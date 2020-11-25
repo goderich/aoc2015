@@ -10,8 +10,9 @@
     (_ acc)))
 
 ;; part 1
-(foldl par-to-fun 0
-       (string->list (file->string "inputs/day1.txt")))
+(for/fold ((acc 0))
+          ((c (in-string (file->string "inputs/day1.txt"))))
+  (par-to-fun c acc))
 
 ;; part 2
 (for/fold ((acc 0)
