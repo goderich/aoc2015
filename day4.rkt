@@ -3,7 +3,7 @@
 (require openssl/md5)
 
 (define starts-with-zeros
-  (lambda (i #:numzeros (zs 5))
+  (λ (i #:numzeros (zs 5))
     (equal? (make-string zs #\0)
             (substring (md5 (open-input-string (format "bgvyzdsv~a" i))) 0 zs))))
 
