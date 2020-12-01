@@ -19,7 +19,7 @@
        (remove-duplicates)
        (cons (second (last edges)))))
 
-(define (find-edge v1 v2)
+(define (find-distance v1 v2)
   (for/first ((edge edges)
               #:when (and (member v1 edge)
                           (member v2 edge)))
@@ -29,7 +29,7 @@
   (for/list ((vs (permutations vertices)))
     (for/sum ((v1 (drop-right vs 1))
               (v2 (rest vs)))
-      (find-edge v1 v2))))
+      (find-distance v1 v2))))
 
 ;; part 1
 
