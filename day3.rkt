@@ -5,11 +5,12 @@
          racket/match)
 
 (define (update-pos c pos)
+  (match-define (cons x y) pos)
   (match c
-    (#\^ (cons (car pos) (add1 (cdr pos))))
-    (#\< (cons (sub1 (car pos)) (cdr pos)))
-    (#\> (cons (add1 (car pos)) (cdr pos)))
-    (#\v (cons (car pos) (sub1 (cdr pos))))))
+    (#\^ (cons x (add1 y)))
+    (#\< (cons (sub1 x) y))
+    (#\> (cons (add1 x) y))
+    (#\v (cons x (sub1 y)))))
 
 ;; part 1
 
