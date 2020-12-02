@@ -6,7 +6,7 @@
          threading)
 
 (define edges
- (for/list ((line (file->lines "inputs/day9.txt")))
+ (for/list ((line (file->lines "inputs/day09.txt")))
    (define words (string-split line))
    (define origin (first words))
    (define destination (third words))

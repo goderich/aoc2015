@@ -34,7 +34,7 @@
        (has-double-letter? str)
        (no-forbidden-strs? str)))
 
-(count nice-string? (file->lines "inputs/day5.txt"))
+(count nice-string? (file->lines "inputs/day05.txt"))
 
 ;; part 2
 
@@ -67,4 +67,4 @@
   (and (has-repeating-pair? str)
        (has-split-pair? str)))
 
-(count nice-string-2? (file->lines "inputs/day5.txt"))
+(count nice-string-2? (file->lines "inputs/day05.txt"))

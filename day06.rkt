@@ -72,7 +72,7 @@
    (map (λ (x) (cons x 0))
         (matrix (coord 0 0) (coord 999 999)))))
 
-(for ((line (file->lines "inputs/day6.txt")))
+(for ((line (file->lines "inputs/day06.txt")))
   (run-instruction line execute!))
 
 (count positive? (hash-values grid))
@@ -91,7 +91,7 @@
 ;; Reset the grid for part 2
 (run-instruction "turn off 0,0 through 999,999" execute!)
 
-(for ((line (file->lines "inputs/day6.txt")))
+(for ((line (file->lines "inputs/day06.txt")))
   (run-instruction line execute2!))
 
 (apply + (hash-values grid))

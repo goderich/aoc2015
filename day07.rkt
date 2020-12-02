@@ -45,7 +45,7 @@
 
 (define dict (make-hash))
 
-(for ((line (file->lines "inputs/day7.txt")))
+(for ((line (file->lines "inputs/day07.txt")))
   (read-instr-line line))
 
 (calculate-instr (hash-ref dict "a"))
@@ -54,7 +54,7 @@
 
 (hash-clear! dict)
 
-(for ((line (file->lines "inputs/day7.txt")))
+(for ((line (file->lines "inputs/day07.txt")))
   (read-instr-line line))
 
 (hash-set! dict "b" "16076")

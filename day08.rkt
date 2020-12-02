@@ -8,11 +8,11 @@
 ;; part 1
 
 (define string-literals-num
-  (for/sum ((s (file->lines "inputs/day8.txt")))
+  (for/sum ((s (file->lines "inputs/day08.txt")))
     (string-length s)))
 
 (define string-values-num
-  (for/sum ((s (file->lines "inputs/day8.txt")))
+  (for/sum ((s (file->lines "inputs/day08.txt")))
     (string-length
      (with-input-from-string s read))))
 

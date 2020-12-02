@@ -23,7 +23,7 @@
   (+ surface-area extra))
 
 (for/fold ((acc 0))
-          ((s (file->lines "inputs/day2.txt")))
+          ((s (file->lines "inputs/day02.txt")))
   (+ acc (calculate-paper (parse-dimensions s))))
 
 ;; part 2
@@ -39,5 +39,5 @@
   (+ (apply * ns) (smallest-perimeter ns)))
 
 (for/fold ((acc 0))
-          ((s (file->lines "inputs/day2.txt")))
+          ((s (file->lines "inputs/day02.txt")))
   (+ acc (calculate-ribbon (parse-dimensions s))))
