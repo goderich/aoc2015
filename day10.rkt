@@ -2,7 +2,10 @@
 
 (require racket/function
          racket/list
+         racket/file
          racket/string)
+
+(define input (string-trim (file->string "inputs/day10.txt")))
 
 (define (split-by-same xs)
   (define (loop acc xs)
@@ -22,14 +25,14 @@
 
 ;; part 1
 
-(for/fold ((acc "1113122113")
+(for/fold ((acc input)
            #:result (string-length acc))
           ((_ (in-range 40)))
   (look-and-say acc))
 
 ;; part 2
 
-(for/fold ((acc "1113122113")
+(for/fold ((acc input)
            #:result (string-length acc))
           ((_ (in-range 50)))
   (look-and-say acc))
