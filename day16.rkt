@@ -11,8 +11,7 @@
 
 ;; Just practicing me macro skills
 (define-syntax-parse-rule (try-strings/p str ...)
-   #:with (s/p ...) #'((try/p (string/p str)) ...)
-   (or/p s/p ...))
+   (or/p (try/p (string/p str)) ...))
 
 (define compound/p
   (do (c <- (try-strings/p "children" "cats"
