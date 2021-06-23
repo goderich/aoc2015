@@ -54,11 +54,11 @@
               (b (in-inclusive-range 0 100))
               (c (in-inclusive-range 0 100))
               (d (in-inclusive-range 0 100))
-              #:when (and (= 100 (+ a b c d))
-                          ;; Additional condition for part 2
-                          (if cal?
-                              (= 500 (apply + (map * (list a b c d) (map fifth props))))
-                              #t)))
+              #:when (= 100 (+ a b c d))
+              ;; Additional condition for part 2
+              #:when (if cal?
+                         (= 500 (apply + (map * (list a b c d) (map fifth props))))
+                         #t))
     (define new-score (calculate-score (list a b c d) props))
     (if (new-score . > . score)
         new-score
