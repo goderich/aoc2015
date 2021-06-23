@@ -5,7 +5,8 @@
          data/monad
          data/applicative
          data/either
-         threading)
+         threading
+         syntax/parse/define)
 
 ;; Megaparsack doesn't include facilities to parse
 ;; negative integers, so this is a simple parser for
@@ -48,21 +49,43 @@
   (for/product ((f (list first second third fourth)))
     (calculate-property-score f)))
 
-(define (find-max-score #:calories? (cal? #f))
-  (for*/fold ((score 0))
-             ((a (in-inclusive-range 0 100))
-              (b (in-inclusive-range 0 100))
-              (c (in-inclusive-range 0 100))
-              (d (in-inclusive-range 0 100))
-              #:when (= 100 (+ a b c d))
-              ;; Additional condition for part 2
-              #:when (if cal?
-                         (= 500 (apply + (map * (list a b c d) (map fifth props))))
-                         #t))
-    (define new-score (calculate-score (list a b c d) props))
-    (if (new-score . > . score)
-        new-score
-        score)))
+;; This is really just practice for me, though it does
+;; make a few things shorter and the optional #:when
+;; more elegant. I wouldn't say it's more readable than
+;; a function with a clumsy check on the when.
+(define-syntax-parser find-max-score
+  ;; Need to specify :id here so that the macro
+  ;; doesn't eat the #:calories? keyword and the integer.
+  ((_ var:id ... (~optional (~seq #:calories? cal)))
+   #'(for*/fold ((score 0))
+                ((var (in-inclusive-range 0 100)) ...
+                #:when (= 100 (+ var ...))
+                ;; Additional condition for part 2
+                (~? (~@ #:when (= cal (apply + (map * (list var ...) (map fifth props)))))))
+       (define new-score (calculate-score (list var ...) props))
+       (if (new-score . > . score)
+           new-score
+           score))))
 
-(find-max-score)
-(find-max-score #:calories? #t)
+;; part 1
+(find-max-score capacity durability flavour texture)
+
+;; part 2
+(find-max-score capacity durability flavour texture #:calories? 500)
+
+;; Unfolds into:
+;;
+;; (for*/fold
+;;  ((score 0))
+;;  ((capacity   (in-inclusive-range 0 100))
+;;   (durability (in-inclusive-range 0 100))
+;;   (flavour    (in-inclusive-range 0 100))
+;;   (texture    (in-inclusive-range 0 100))
+;;   #:when (= 100 (+ capacity durability flavour texture))
+;;   #:when (= 500 (apply +
+;;                   (map *
+;;                     (list capacity durability flavour texture)
+;;                     (map fifth props)))))
+;;  (define new-score
+;;    (calculate-score (list capacity durability flavour texture) props))
+;;  (if (> new-score score) new-score score))
