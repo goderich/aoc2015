@@ -59,9 +59,9 @@
   ((_ var:id ... (~optional (~seq #:calories? cal)))
    #'(for*/fold ((score 0))
                 ((var (in-inclusive-range 0 100)) ...
-                #:when (= 100 (+ var ...))
-                ;; Additional condition for part 2
-                (~? (~@ #:when (= cal (apply + (map * (list var ...) (map fifth props)))))))
+                 #:when (= 100 (+ var ...))
+                 ;; Additional condition for part 2
+                 (~? (~@ #:when (= cal (apply + (map * (list var ...) (map fifth props)))))))
        (define new-score (calculate-score (list var ...)))
        (if (new-score . > . score)
            new-score
