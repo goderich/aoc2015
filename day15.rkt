@@ -36,10 +36,10 @@
   (for/list ((line (file->lines "inputs/day15.txt")))
     (from-success #f (parse-string properties/p line))))
 
-(define (calculate-score amounts property-list)
+(define (calculate-score amounts)
   (define (calculate-property-score f)
     (define interim-score
-      (~>> property-list
+      (~>> props
            (map f)
            (map * amounts)
            (apply +)))
@@ -62,7 +62,7 @@
                 #:when (= 100 (+ var ...))
                 ;; Additional condition for part 2
                 (~? (~@ #:when (= cal (apply + (map * (list var ...) (map fifth props)))))))
-       (define new-score (calculate-score (list var ...) props))
+       (define new-score (calculate-score (list var ...)))
        (if (new-score . > . score)
            new-score
            score))))
