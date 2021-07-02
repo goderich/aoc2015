@@ -53,7 +53,8 @@
 (define (correct-sue? s)
   (define (correct-amount? compound num)
     (= num (hash-ref sue-gift compound)))
-  (andmap identity (hash-map (sue-compounds s) correct-amount?)))
+  (for/and (((compound num) (sue-compounds s)))
+    (correct-amount? compound num)))
 
 (for/first ((s input)
             #:when (correct-sue? s))
@@ -67,7 +68,8 @@
       ((or "cats" "trees") (num . > .(hash-ref sue-gift compound)))
       ((or "pomeranians" "goldfish") (num . < .(hash-ref sue-gift compound)))
       (_ (= num (hash-ref sue-gift compound)))))
-  (andmap identity (hash-map (sue-compounds s) correct-amount?)))
+  (for/and (((compound num) (sue-compounds s)))
+    (correct-amount? compound num)))
 
 (for/first ((s input)
             #:when (correct-sue-2? s))
